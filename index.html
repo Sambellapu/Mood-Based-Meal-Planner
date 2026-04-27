@@ -2,46 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Carbon Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Carbon Footprint Tracker to log electricity, car travel, and flights with trends and history.">
+  <title>Carbon Footprint Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
+  <main class="app-shell">
+    <section class="hero card" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Sustainability dashboard</p>
+        <h1 id="page-title">🌱 Carbon Footprint Tracker</h1>
+        <p class="subtitle">Track your monthly habits, see trends over time, and find opportunities to improve.</p>
+      </div>
+      <div class="hero-badge" aria-label="Simple and accessible tracker">Track • Analyze • Improve</div>
+    </section>
 
-<div class="container">
-  <h1>🌱 Carbon Footprint Tracker</h1>
-  <p class="subtitle">Track • Analyze • Improve</p>
+    <section class="grid">
+      <form class="card form-card" id="entry-form" autocomplete="off">
+        <h2>New entry</h2>
+        <p class="section-copy">Enter your activity for this period. All fields are optional, but more data gives better estimates.</p>
 
-  <div class="card">
-    <label>⚡ Electricity (kWh / month)</label>
-    <input type="number" id="electricity">
+        <div class="field-group">
+          <label for="electricity">⚡ Electricity <span>(kWh / month)</span></label>
+          <input type="number" id="electricity" name="electricity" min="0" step="0.1" inputmode="decimal" placeholder="e.g. 420">
+        </div>
 
-    <label>Car Travel (miles / month)</label>
-    <input type="number" id="car">
+        <div class="field-group">
+          <label for="car">🚗 Car travel <span>(miles / month)</span></label>
+          <input type="number" id="car" name="car" min="0" step="0.1" inputmode="decimal" placeholder="e.g. 850">
+        </div>
 
-    <label>Flights (hours / year)</label>
-    <input type="number" id="flights">
+        <div class="field-group">
+          <label for="flights">✈️ Flights <span>(hours / year)</span></label>
+          <input type="number" id="flights" name="flights" min="0" step="0.1" inputmode="decimal" placeholder="e.g. 6">
+        </div>
 
-    <button onclick="addEntry()">Add Entry</button>
-  </div>
+        <button type="submit" class="primary-btn">Add Entry</button>
+      </form>
 
-  <div class="result-card">
-    <h2>Latest Result</h2>
-    <p id="result">No data yet</p>
-    <p id="comparison"></p>
-  </div>
+      <section class="card result-card" aria-labelledby="latest-result-title">
+        <h2 id="latest-result-title">Latest result</h2>
+        <p id="result" class="result-text">No data yet</p>
+        <p id="comparison" class="muted"></p>
+      </section>
 
-  <div class="card">
-    <h2>Your Trend</h2>
-    <canvas id="chart"></canvas>
-  </div>
+      <section class="card chart-card" aria-labelledby="trend-title">
+        <h2 id="trend-title">Your trend</h2>
+        <canvas id="chart" aria-label="Carbon footprint trend chart" role="img"></canvas>
+      </section>
 
-  <div class="card">
-    <h2>History</h2>
-    <ul id="history"></ul>
-  </div>
-</div>
-
-<script src="script.js"></script>
+      <section class="card history-card" aria-labelledby="history-title">
+        <h2 id="history-title">History</h2>
+        <ul id="history" class="history-list"></ul>
+      </section>
+    </section>
+  </main>
 </body>
 </html>
